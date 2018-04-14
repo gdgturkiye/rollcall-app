@@ -1,6 +1,6 @@
 # Roll Call Application
 
-This application is developed event registration tasks. A simple Meetup API integration is present.
+This application is developed for event registration tasks. A simple Meetup API integration is present.
 
 ## Major Features
 

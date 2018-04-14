@@ -1,6 +1,6 @@
 # Etkinlik Yoklama Uygulamasi
 
-Bu uygulama etkinlik kayıt için geliştirilmiştir. Meetup API ile basit bir entegrasyon bulunmaktadır.
+Bu uygulama etkinlik kaydı için geliştirilmiştir. Meetup API ile basit bir entegrasyon bulunmaktadır.
 
 ## Temel Özellikler
 
