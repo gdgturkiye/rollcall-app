@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Call</title>
+    <head lang="en">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+        <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+              href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+              rel="stylesheet" media="screen" />
+        <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css" />
+    </head>
+</head>
+<body>
+    <th:block th:include="layout/template"></th:block>
+    <div class="container">
+        <div>
+            <strong># of Attendees: </strong> <span th:text="${numberOfAttendees}"></span>
+        </div>
+        <div>
+            <strong>Attendance: </strong> <span th:text="${attendance}"></span>
+        </div>
+        <div>
+            <a th:href="${'/attendee/new/'}" class="btn btn-primary">New Attendee</a>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>RSVP</th>
+                <th>Attended</th>
+                <th>*</th>
+                <th>*</th>
+            </tr>
+            <tr th:each="attendee : ${attendees}">
+                <td th:text="${attendee.name}">Name</td>
+                <td th:text="${attendee.gender}">Gender</td>
+                <td th:text="${attendee.rsvp}">RSVP</td>
+                <td th:text="${attendee.attended}">Attended</td>
+                <td><a th:href="${'/attendee/edit/' + attendee.id}" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <span th:if="${attendee.attended} == 'No'">
+                        <a th:href="${'/attendee/attend/' + attendee.id}" class="btn btn-success">Mark as Attended</a>
+                    </span>
+                    <span th:if="${attendee.attended} == 'Yes'">
+                        <a th:href="${'/attendee/unattend/' + attendee.id}" class="btn btn-danger">Mark as Unattended</a>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
