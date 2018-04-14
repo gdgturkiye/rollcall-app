@@ -32,8 +32,11 @@ public class IndexController {
     @Autowired
     AttendeeService attendeeService;
 
-    @Value("${meetup.baseurl}")
+    @Value("${meetup.url}")
     String meetupBaseUrl;
+
+    @Value("${meetup.rsvp.path}")
+    String meetupRSVPPath;
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -112,9 +115,9 @@ public class IndexController {
     }
 
     private void getRSVPsfromMeetup() {
-        String url = meetupBaseUrl + "/GDGAnkara/events/247383362/rsvps?photo-host=public&sig_id=223368809&sig=3d34a6f4eb4693518aefeb41642bdcaeef4c554b";
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, String.class);
+        String url = meetupBaseUrl + meetupRSVPPath;
         try {
+            ResponseEntity responseEntity = restTemplate.getForEntity(url, String.class);
             ArrayList<MeetupRSVP> rsvps = objectMapper.readValue(responseEntity.getBody().toString(), new TypeReference<ArrayList<MeetupRSVP>>() {});
             for(MeetupRSVP meetupRSVP : rsvps) {
                 Attendee attendee = new Attendee();
